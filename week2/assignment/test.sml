@@ -31,18 +31,22 @@ val test7 = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 val test7_1 = remove_card ([(Hearts, Ace), (Hearts, Ace), (Hearts, Num 4)], (Hearts, Ace), IllegalMove) = [(Hearts, Ace), (Hearts, Num 4)]
 
 
-ERRO ERRO ERRO
+
 val test7_2 = remove_card ([(Hearts, Ace)], (Hearts, Jack), IllegalMove) = IllegalMove
 
 val test7_3 = remove_card ([(Clubs, Ace), (Hearts, Ace), (Hearts, Num 4)], (Hearts, Ace), IllegalMove) = [(Clubs, Ace), (Hearts, Num 4)]
 
+*)
 val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)] = true
+val test8_1 = all_same_color [(Hearts, Ace), (Clubs, Num 4), (Hearts, Ace)] = false
+val test8_2 = all_same_color [(Hearts, Ace), (Diamonds, Num 4), (Hearts, Ace)] = true
 
 val test9 = sum_cards [(Clubs, Num 2),(Clubs, Num 2)] = 4
-*)
-(*
-val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
+val test9_1 = sum_cards [(Clubs, Num 2),(Clubs, Num 2), (Hearts, Ace), (Diamonds, Jack)] = 25
 
+
+val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
+(*
 val test11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
 val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],

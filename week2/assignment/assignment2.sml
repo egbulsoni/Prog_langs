@@ -84,28 +84,60 @@ fun card_value(card: card) =
          | Num i => i
          | _ => 10
    end
+
+
+   
 (*
+fun remove_card(cs: card list, c: card, e: exn) =
+   let fun discard(ls, acc) =
+      x::xs => if x = c 
+               then acc @ xs
+               else
+   in
+
+   end
+
+
 fun remove_card(cs: card list, c: card, e: exn) =
    let fun discard(cl, acc) =
       case cl of
-         [] => raise e
+         [] => acc
          | x::xs => if x = c
                   then acc @ xs
                   else discard(xs, acc @ [x])
    in
       discard(cs, [])
    end
+
 *)
-(*
-fun all_same_color(cs : card list) =
+fun all_same_color(cs: card list) =
    case cs of
+      [] => true
+      | x::[] => true
+      | x::y::xs => card_color(x) = card_color(y) = all_same_color(xs)
 
 fun sum_cards(cs: card list) =
    let fun accumulator(cl, acc) =
       case cl of
          [] => acc
-         | x::xs => accumulator(cl ,card_value(x))
+         | x::xs => accumulator(xs, acc + card_value(x))
    in
       accumulator(cs, 0)
    end
-   *)
+
+fun score(cs: card list, goal: int) =
+   let val sum = sum_cards(cs)
+   val areAllSameColor = all_same_color(cs)
+   in
+      let val preliminaryScore =
+         if sum > goal
+         then 3 * (sum - goal)
+         else
+         goal - sum
+      in
+         if areAllSameColor
+         then preliminaryScore div 2
+         else preliminaryScore
+      end
+
+   end
