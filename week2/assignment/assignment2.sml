@@ -85,31 +85,22 @@ fun card_value(card: card) =
          | _ => 10
    end
 
-
-   
-(*
 fun remove_card(cs: card list, c: card, e: exn) =
-   let fun discard(ls, acc) =
-      x::xs => if x = c 
-               then acc @ xs
-               else
-   in
-
-   end
-
-
-fun remove_card(cs: card list, c: card, e: exn) =
+   (*cl -> card list, acc -> card list*)
    let fun discard(cl, acc) =
       case cl of
-         [] => acc
+         [] => raise e
+         | x::[] => if x = c
+                  then []
+                  else raise e
          | x::xs => if x = c
-                  then acc @ xs
-                  else discard(xs, acc @ [x])
+                     then acc @ xs
+                     else discard(xs, acc @ [x])
    in
       discard(cs, [])
    end
 
-*)
+
 fun all_same_color(cs: card list) =
    case cs of
       [] => true
@@ -132,12 +123,25 @@ fun score(cs: card list, goal: int) =
       let val preliminaryScore =
          if sum > goal
          then 3 * (sum - goal)
-         else
-         goal - sum
+         else goal - sum
       in
          if areAllSameColor
          then preliminaryScore div 2
          else preliminaryScore
       end
 
+   end
+
+fun officiate(cs: card list, m: move list, goal: int) =
+   let fun game(hc: card list, cc: card list, ml: move list) =
+      case ml of
+         [] => score(hc, goal)
+         | x::xs => case x of
+                     Discard c => game(remove_card(hc, c, IllegalMove), cc, xs) 
+                     | Draw => case cc of
+                              [] => score(hc, goal)
+                              | y::ys => game(hc @ [y],ys, xs)
+
+   in
+      game([], cs, m)
    end

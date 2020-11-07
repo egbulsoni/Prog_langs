@@ -25,17 +25,16 @@ val test4 = similar_names ([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie"
 val test5 = card_color (Clubs, Num 2) = Black
 
 val test6 = card_value (Clubs, Num 2) = 2
-(*
+
 val test7 = remove_card ([(Hearts, Ace)], (Hearts, Ace), IllegalMove) = []
 
 val test7_1 = remove_card ([(Hearts, Ace), (Hearts, Ace), (Hearts, Num 4)], (Hearts, Ace), IllegalMove) = [(Hearts, Ace), (Hearts, Num 4)]
 
 
-
-val test7_2 = remove_card ([(Hearts, Ace)], (Hearts, Jack), IllegalMove) = IllegalMove
+(*
+val test7_2 = remove_card ([(Hearts, Ace)], (Hearts, Jack), IllegalMove) = exception IllegalMove
 
 val test7_3 = remove_card ([(Clubs, Ace), (Hearts, Ace), (Hearts, Num 4)], (Hearts, Ace), IllegalMove) = [(Clubs, Ace), (Hearts, Num 4)]
-
 *)
 val test8 = all_same_color [(Hearts, Ace), (Hearts, Ace)] = true
 val test8_1 = all_same_color [(Hearts, Ace), (Clubs, Num 4), (Hearts, Ace)] = false
@@ -46,7 +45,7 @@ val test9_1 = sum_cards [(Clubs, Num 2),(Clubs, Num 2), (Hearts, Ace), (Diamonds
 
 
 val test10 = score ([(Hearts, Num 2),(Clubs, Num 4)],10) = 4
-(*
+
 val test11 = officiate ([(Hearts, Num 2),(Clubs, Num 4)],[Draw], 15) = 6
 
 val test12 = officiate ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Spades,Ace)],
@@ -59,5 +58,3 @@ val test13 = ((officiate([(Clubs,Jack),(Spades,Num(8))],
                          42);
                false) 
               handle IllegalMove => true)
-             
-  *)           
