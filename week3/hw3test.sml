@@ -13,6 +13,7 @@ val test2 = longest_string1 ["A","bc","C"] = "bc"
 val test2_1 = longest_string1 ["A","ac","bc","C"] = "ac"
 val test2_2 = longest_string1 ["A","ac","cbc","C"] = "cbc"
 val test2_3 = longest_string1 ["A","ac","bc", "ad", "C"] = "ac"
+val test2_4 = longest_string1 [] = ""
 
 
 
@@ -20,21 +21,42 @@ val test3 = longest_string2 ["A","bc","C"] = "bc"
 val test3_1 = longest_string2 ["A","ac","bc","C"] = "bc"
 val test3_2 = longest_string2 ["A","ac","cbc","C"] = "cbc"
 val test3_3 = longest_string2 ["A","ac","bc", "ad", "C"] = "ad"
-
-
+val test3_4 = longest_string2 [] = ""
 (*
+val test 4c = longest_string_helper((fn (fst, snd) => fst > snd), ["A","ac","bc","C"]) = "ac"
+val test 4d = longest_string_helper((fn (fst, snd) => fst >= snd), ["A","ac","bc","C"]) = "bc"
+*)
+
 val test4a = longest_string3 ["A","bc","C"] = "bc"
 
 val test4b = longest_string4 ["A","B","C"] = "C"
+
+val test4 = longest_string3 ["A","bc","C"] = "bc"
+val test4_1 = longest_string3 ["A","ac","bc","C"] = "ac"
+val test4_2 = longest_string3 ["A","ac","cbc","C"] = "cbc"
+val test4_3 = longest_string3 ["A","ac","bc", "ad", "C"] = "ac"
+
+
+val test41 = longest_string4 ["A","bc","C"] = "bc"
+val test41_1 = longest_string4 ["A","ac","bc","C"] = "bc"
+val test41_2 = longest_string4 ["A","ac","cbc","C"] = "cbc"
+val test41_3 = longest_string4 ["A","ac","bc", "ad", "C"] = "ad"
+
+val test4_4 = longest_string3 [] = ""
+val test41_4 = longest_string4 [] = ""
 
 val test5 = longest_capitalized ["A","bc","C"] = "A"
 
 val test6 = rev_string "abc" = "cba"
 
 val test7 = first_answer (fn x => if x > 3 then SOME x else NONE) [1,2,3,4,5] = 4
+(* first_answer (fn x => if x = 0 then SOME x else NONE) [1,2,3,4,5]; *)
 
 val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7] = NONE
+val test8_1 = all_answers (fn x => if x > 1 then SOME [x] else NONE) [2,3,4,5,6,7] = SOME [2,3,4,5,6,7]
 
+
+(*
 val test9a = count_wildcards Wildcard = 1
 
 val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
