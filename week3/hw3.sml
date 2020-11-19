@@ -16,7 +16,7 @@ datatype valu = Const of int
 
 fun g f1 f2 p =
     let 
-	val r = g f1 f2 
+	val r = g f1 f2
     in
 	case p of
 	    Wildcard          => f1 ()
@@ -25,6 +25,17 @@ fun g f1 f2 p =
 	  | ConstructorP(_,p) => r p
 	  | _                 => 0
     end
+
+(*
+	- g;
+	g (fn x => 1) (String.size) (TupleP [Wildcard, Wildcard]);
+
+	val it = fn : (unit -> int) -> (string -> int) -> pattern -> int
+
+	Wildcard 					=> 1
+	TupleP [patterns] => fold (cur, long => g 1 f2) 0 [patterns]
+	ConstructorP(_,p) => g 
+*)
 
 (**** for the challenge problem only ****)
 
@@ -86,8 +97,34 @@ fun all_answers f a =
 		helper(optlist, [])
 	end
 
+fun count_wildcards(p: pattern) =
+	g (fn x => 1) (String.size) p
+
+
+fun count_wild_and_variable_lengths(p: pattern) =
+	g (fn x => 1) (String.size) p
+
+fun count_some_var(s: string, p: pattern) =
+	g (fn x => 1) (fn (y) => if y = s then 1 else 0) p
+
+(* fun count_some_var(s: string, p: pattern) = *)
+	
+
+
 (*
 THINGS TO HELP REASONING - IGNORE
+
+- g;
+val it = fn : (unit -> int) -> (string -> int) -> pattern -> int
+
+datatype pattern = Wildcard
+		 | Variable of string
+		 | UnitP
+		 | ConstP of int
+		 | TupleP of pattern list
+		 | ConstructorP of string * pattern
+
+val g = fn : (unit -> int) -> (string -> int) -> pattern -> int
 
  (’a -> ’b list option) -> ’a list -> ’b list option
 'a = int

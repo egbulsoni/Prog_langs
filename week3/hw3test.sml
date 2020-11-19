@@ -56,13 +56,17 @@ val test8 = all_answers (fn x => if x = 1 then SOME [x] else NONE) [2,3,4,5,6,7]
 val test8_1 = all_answers (fn x => if x > 1 then SOME [x] else NONE) [2,3,4,5,6,7] = SOME [2,3,4,5,6,7]
 
 
-(*
+
 val test9a = count_wildcards Wildcard = 1
+val test9a_1 = count_wildcards (TupleP [Wildcard, UnitP, TupleP [Wildcard, Wildcard] ]) = 3
 
 val test9b = count_wild_and_variable_lengths (Variable("a")) = 1
 
 val test9c = count_some_var ("x", Variable("x")) = 1
-
+val test9c_1 = count_some_var ("y", Variable("x")) = 0
+val test9c_2 = count_some_var ("y", (TupleP [Variable("x"), Variable("Y")]) ) = 0
+val test9c_3 = count_some_var ("y", (TupleP [Variable("x"), Variable("y"), Variable("y")]) ) = 2
+(*
 val test10 = check_pat (Variable("x")) = true
 
 val test11 = match (Const(1), UnitP) = NONE
